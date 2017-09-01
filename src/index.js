@@ -2,7 +2,6 @@
 import './scss/main.scss';
 import {sup} from './js/module';
 import {hello} from './js/hello';
-
 console.log('Hi From webpack');
 hello();
 sup();

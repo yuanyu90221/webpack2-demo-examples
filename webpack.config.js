@@ -2,6 +2,7 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -13,15 +14,14 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     devtool: 'inline-source-map',
+    devServer: {
+        contentBase: './dist',
+        port: 3100
+    },
     module: {
         rules: [
             {
                 test: /\.css$/,
-                // use: [
-                //     'style-loader',
-                //     'css-loader',
-                //     'postcss-loader'
-                // ],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: ['css-loader','postcss-loader']
@@ -29,12 +29,6 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                // use: [
-                //     {loader: 'style-loader'},
-                //     {loader: 'css-loader'},
-                //     {loader: 'postcss-loader'},
-                //     {loader: 'sass-loader'}
-                // ],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
@@ -61,6 +55,18 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Multiple bundles',
             template: './src/template/template.html'
+        }),
+        new BrowserSyncPlugin(
+        // BrowserSync options
+        {
+            host: 'localhost',
+            port: 3000,
+            // proxy the webpack dev server
+            proxy: 'http://localhost:3100/'
+        },
+        // plugin options
+        {
+            reload: false
         })
     ]
 }

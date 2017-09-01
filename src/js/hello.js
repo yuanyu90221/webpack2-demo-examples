@@ -1,5 +1,5 @@
 function hello() {
-    console.log('Hello from JS Module');
+    console.log('Hello from hello js');
 }
 
 export {hello}
