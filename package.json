@@ -17,6 +17,7 @@
     "babel-preset-env": "^1.6.0",
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
+    "extract-text-webpack-plugin": "^3.0.0",
     "lost": "^8.2.0",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
@@ -33,8 +34,7 @@
   "bugs": {
     "url": "https://github.com/yuanyu90221/webpack2-demo-examples/issues"
   },
-  "homepage": "https://github.com/yuanyu90221/webpack2-demo-examples#readme"
-  ,
+  "homepage": "https://github.com/yuanyu90221/webpack2-demo-examples#readme",
   "browserlist": [
     "> 1%",
     "last 2 version"
