@@ -12,6 +12,7 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {
@@ -36,13 +37,21 @@ module.exports = {
                 // ],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader','postcss-loader', 'sass-loader']
+                    use: [
+                        {loader:'css-loader', options: {sourceMap: true}},
+                        {loader:'postcss-loader', options: {sourceMap: true}}, 
+                        {loader:'sass-loader', options: {sourceMap: true}}
+                    ]
                 })
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.html$/,
+                loader: 'html-loader'
             }
         ]
     },
@@ -50,7 +59,8 @@ module.exports = {
         new CleanWebpackPlugin(['dist']),
         new ExtractTextPlugin('style.css'),
         new HtmlWebpackPlugin({
-            title: 'Multiple bundles'
+            title: 'Multiple bundles',
+            template: './src/template/template.html'
         })
     ]
 }
